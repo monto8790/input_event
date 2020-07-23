@@ -148,7 +148,9 @@ var roll_val = roll_neutral;
 // var alt_key_down = false;
 
 // const ioHook = require('iohook');
-const keyboard = require('input-event');
+const InputEvent = require('input-event');
+const input = new InputEvent('/dev/input/event0');
+const keyboard = new InputEvent.Keyboard(input);
 /* In next example we register CTRL+F7 shortcut (in MacOS, for other OS, keycodes can be some different). */
 //
 // const id = ioHook.registerShortcut([17, 32], (keys) => {
@@ -253,14 +255,14 @@ keyboard.on("keyup", event => {
      }
     */
 
-    if(event.code === true) {
+    if(event.code === '56') {
         if (map.has(event.code)) {
             const command = map.get(event.code);
             console.log(command);
         }
     }
     else {
-        if (map.has(event.keycode)) {
+        if (map.has(event.code)) {
             const command = map.get(event.code);
 
             if(command === 'throttle_high' || command === 'throttle_low') {
